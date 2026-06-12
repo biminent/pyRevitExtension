@@ -1,0 +1,18 @@
+{
+    "extensions": [
+        {
+            "builtin": "False",
+            "default_enabled": "True",
+            "type": "extension",
+            "rocket_mode_compatible": "True",
+            "name": "Biminent",
+            "description": "Biminent Tools - free productivity tools for Revit by Biminent. Visit biminent.com for Apartment Sheets and other professional BIM products.",
+            "author": "Viktor Kuzev",
+            "author_profile": "https://biminent.com",
+            "url": "https://github.com/biminent/pyRevitExtension.git",
+            "website": "https://biminent.com",
+            "image": "",
+            "dependencies": []
+        }
+    ]
+}
