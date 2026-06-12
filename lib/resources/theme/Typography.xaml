@@ -1,0 +1,150 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- 
+    Biminent Typography System
+    Using Segoe UI as the primary font (Windows system font)
+    -->
+
+    <!-- Font Families -->
+    <FontFamily x:Key="PrimaryFontFamily">Segoe UI</FontFamily>
+    <FontFamily x:Key="MonospaceFontFamily">Cascadia Code, Consolas</FontFamily>
+
+    <!-- Font Sizes -->
+    <sys:Double x:Key="FontSizeXSmall" xmlns:sys="clr-namespace:System;assembly=mscorlib">10</sys:Double>
+    <sys:Double x:Key="FontSizeSmall" xmlns:sys="clr-namespace:System;assembly=mscorlib">12</sys:Double>
+    <sys:Double x:Key="FontSizeNormal" xmlns:sys="clr-namespace:System;assembly=mscorlib">14</sys:Double>
+    <sys:Double x:Key="FontSizeMedium" xmlns:sys="clr-namespace:System;assembly=mscorlib">16</sys:Double>
+    <sys:Double x:Key="FontSizeLarge" xmlns:sys="clr-namespace:System;assembly=mscorlib">18</sys:Double>
+    <sys:Double x:Key="FontSizeXLarge" xmlns:sys="clr-namespace:System;assembly=mscorlib">24</sys:Double>
+    <sys:Double x:Key="FontSizeXXLarge" xmlns:sys="clr-namespace:System;assembly=mscorlib">32</sys:Double>
+    <sys:Double x:Key="FontSizeHuge" xmlns:sys="clr-namespace:System;assembly=mscorlib">48</sys:Double>
+
+    <!-- Heading Styles -->
+    <Style x:Key="HeadingXLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeXXLarge}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="HeadingLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeXLarge}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="HeadingMediumStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="HeadingSmallStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Body Text Styles -->
+    <Style x:Key="BodyLargeStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="BodyStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="BodySmallStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Secondary Text Styles -->
+    <Style x:Key="SecondaryTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="SecondaryTextSmallStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Caption Style -->
+    <Style x:Key="CaptionStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeXSmall}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <!-- Label Style -->
+    <Style x:Key="LabelStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="Margin" Value="0,0,0,4"/>
+    </Style>
+
+    <!-- Monospace Style (for code/technical content) -->
+    <Style x:Key="MonospaceStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource MonospaceFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+    </Style>
+
+    <!-- Link Style -->
+    <Style x:Key="LinkStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource PrimaryFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
+
+    <!-- Status Text Styles -->
+    <Style x:Key="SuccessTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}"/>
+    </Style>
+
+    <Style x:Key="ErrorTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"/>
+    </Style>
+
+    <Style x:Key="WarningTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
+    </Style>
+
+    <Style x:Key="InfoTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStyle}">
+        <Setter Property="Foreground" Value="{DynamicResource InfoBrush}"/>
+    </Style>
+
+</ResourceDictionary>

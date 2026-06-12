@@ -1,0 +1,5 @@
+title: Reload Link
+tooltip: Reload the selected DWG/CAD link(s) from their source files, picking up any changes on disk. Select one or more linked DWGs first.
+author: Biminent
+help_url: "https://biminent.com"
+context: selection

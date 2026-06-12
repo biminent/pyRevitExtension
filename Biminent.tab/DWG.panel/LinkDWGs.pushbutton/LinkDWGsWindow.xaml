@@ -1,0 +1,130 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Link DWGs"
+        Width="760" Height="560"
+        MinWidth="640" MinHeight="460"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="1" Height="4" Background="{DynamicResource HeaderGradientBrush}"/>
+
+        <Grid Grid.Row="0" Margin="16,12,16,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Source" Style="{DynamicResource HeadingSmallStyle}" Foreground="{DynamicResource PrimaryBrush}"/>
+
+                    <TextBlock Text="DWG folder" Style="{DynamicResource CaptionStyle}" Margin="0,10,0,3"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" x:Name="tb_folder" IsReadOnly="True"
+                                 ToolTip="Folder containing DWG files"/>
+                        <Button Grid.Column="2" Content="Browse" Click="browse_folder"
+                                Style="{DynamicResource SecondaryButtonStyle}"/>
+                    </Grid>
+
+                    <TextBlock Text="Link mode" Style="{DynamicResource HeadingSmallStyle}" Foreground="{DynamicResource PrimaryBrush}" Margin="0,24,0,0"/>
+
+                    <RadioButton x:Name="rb_active"
+                                 Content="Link into active view"
+                                 IsChecked="True"
+                                 Margin="0,10,0,0"
+                                 ToolTip="Link every checked DWG into the current active view"/>
+                    <RadioButton x:Name="rb_drafting"
+                                 Content="Create drafting view per DWG"
+                                 Margin="0,8,0,0"
+                                 ToolTip="Create one drafting view for each checked DWG and link it there"/>
+
+                    <TextBlock Text="DWGs are linked as view-specific imports, with colors preserved, origin centered, units auto-detected, visible layers only, and almost-horizontal/vertical lines corrected."
+                               Style="{DynamicResource SecondaryTextSmallStyle}"
+                               TextWrapping="Wrap" Margin="0,18,0,0"/>
+                </StackPanel>
+
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Preview" Style="{DynamicResource HeadingSmallStyle}" Foreground="{DynamicResource PrimaryBrush}"/>
+                        <TextBlock Grid.Column="1" x:Name="lbl_count" Text="0/0"
+                                   VerticalAlignment="Bottom"
+                                   Style="{DynamicResource SecondaryTextSmallStyle}"
+                                   ToolTip="Checked / all DWG files"/>
+                    </Grid>
+
+                    <ListBox Grid.Row="1" x:Name="list_dwgs"
+                             Margin="0,10,0,0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+
+                    <Grid Grid.Row="2" Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Check All" Click="check_all"
+                                Style="{DynamicResource SmallButtonStyle}" Margin="0,0,6,0"
+                                ToolTip="Check all DWG files"/>
+                        <Button Grid.Column="1" Content="Check None" Click="uncheck_all"
+                                Style="{DynamicResource SmallButtonStyle}"
+                                ToolTip="Uncheck all DWG files"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image x:Name="brand_logo" Height="24" Width="24" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="brand_wordmark" Text="BIMINENT" Margin="8,0,0,0"
+                               VerticalAlignment="Center"
+                               FontFamily="{DynamicResource PrimaryFontFamily}"
+                               FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource PrimaryBrush}"/>
+                    <TextBlock x:Name="status_text" Text="" Margin="14,0,0,0"
+                               VerticalAlignment="Center"
+                               Style="{DynamicResource SecondaryTextSmallStyle}"
+                               TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Close" Click="button_close"
+                        Style="{DynamicResource GhostButtonStyle}"/>
+                <Button Grid.Column="3" x:Name="btn_link" Content="Link DWGs"
+                        Click="link_dwgs" IsDefault="True" IsEnabled="False"
+                        Style="{DynamicResource PrimaryButtonStyle}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

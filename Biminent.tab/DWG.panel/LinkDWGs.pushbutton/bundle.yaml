@@ -1,0 +1,5 @@
+title: "Link\nDWGs"
+tooltip: Link multiple DWG files from a selected folder into the active Revit model.
+author: Biminent
+help_url: "https://biminent.com"
+context: doc-project

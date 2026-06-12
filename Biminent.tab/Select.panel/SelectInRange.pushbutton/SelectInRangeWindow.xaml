@@ -1,0 +1,126 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select in Range"
+        Width="440" SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Brand accent strip along the bottom edge -->
+        <Border Grid.Row="1" Height="4" Background="{DynamicResource HeaderGradientBrush}"/>
+
+        <StackPanel Grid.Row="0" Margin="16,12,16,12">
+
+            <TextBlock Text="Category" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+            <ComboBox x:Name="cb_category" DisplayMemberPath="Label"
+                      SelectionChanged="category_changed"
+                      ToolTip="Limit the search to one category (All Categories scans every element)"/>
+
+            <TextBlock Text="Parameter" Style="{DynamicResource CaptionStyle}" Margin="0,12,0,3"/>
+            <ComboBox x:Name="cb_param" DisplayMemberPath="Label"
+                      SelectionChanged="param_changed"
+                      ToolTip="The instance parameter to test"/>
+
+            <!-- Text parameter controls -->
+            <StackPanel x:Name="panel_text" Margin="0,14,0,0" Visibility="Collapsed">
+                <RadioButton x:Name="rb_exact" GroupName="textmode" Content="Exact match"
+                             IsChecked="True" Checked="text_mode_changed" Margin="0,2,0,0"/>
+                <RadioButton x:Name="rb_textrange" GroupName="textmode" Content="Alphanumeric range"
+                             Checked="text_mode_changed" Margin="0,2,0,0"
+                             ToolTip="Everything from one value up to another, compared alphabetically (e.g. Level 01 to Level 05)"/>
+
+                <StackPanel x:Name="sub_exact" Margin="20,8,0,0">
+                    <TextBlock Text="Value" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+                    <TextBox x:Name="tb_exact" TextChanged="input_changed"/>
+                </StackPanel>
+
+                <Grid x:Name="sub_textrange" Margin="20,8,0,0" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="From" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="To" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" x:Name="tb_from_text" TextChanged="input_changed"
+                             ToolTip="Lower bound (leave blank for no lower limit)"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" x:Name="tb_to_text" TextChanged="input_changed"
+                             ToolTip="Upper bound (leave blank for no upper limit)"/>
+                </Grid>
+            </StackPanel>
+
+            <!-- Numeric parameter controls -->
+            <StackPanel x:Name="panel_number" Margin="0,14,0,0" Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="From" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="To" Style="{DynamicResource CaptionStyle}" Margin="0,0,0,3"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" x:Name="tb_from_num" TextChanged="input_changed"
+                             ToolTip="Lower bound (leave blank for no lower limit)"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" x:Name="tb_to_num" TextChanged="input_changed"
+                             ToolTip="Upper bound (leave blank for no upper limit)"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" x:Name="lbl_unit" Text=""
+                               VerticalAlignment="Center" Margin="8,0,0,0"
+                               Style="{DynamicResource SecondaryTextSmallStyle}"/>
+                </Grid>
+                <TextBlock x:Name="lbl_range_hint" Text="" Margin="0,6,0,0"
+                           Style="{DynamicResource SecondaryTextSmallStyle}"/>
+            </StackPanel>
+
+            <TextBlock Text="Search in" Style="{DynamicResource HeadingSmallStyle}"
+                       Foreground="{DynamicResource PrimaryBrush}" Margin="0,16,0,4"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="rb_model" GroupName="scope" Content="Whole model"
+                             IsChecked="True" Margin="0,0,16,0"/>
+                <RadioButton x:Name="rb_view" GroupName="scope" Content="Active view"/>
+            </StackPanel>
+
+            <!-- Bottom bar -->
+            <Grid Margin="0,18,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image x:Name="brand_logo" Height="24" Width="24" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="brand_wordmark" Text="BIMINENT" Margin="8,0,0,0"
+                               VerticalAlignment="Center"
+                               FontFamily="{DynamicResource PrimaryFontFamily}"
+                               FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource PrimaryBrush}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Close" Click="button_close"
+                        Style="{DynamicResource GhostButtonStyle}"/>
+                <Button Grid.Column="3" x:Name="btn_select" Content="Select"
+                        Click="do_select" IsDefault="True" IsEnabled="False"
+                        Style="{DynamicResource PrimaryButtonStyle}"/>
+            </Grid>
+
+            <TextBlock x:Name="status_text" Text="" Margin="0,10,0,0"
+                       Style="{DynamicResource SecondaryTextSmallStyle}"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,101 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Purge+"
+        Width="520" Height="520"
+        MinWidth="440" MinHeight="380"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Brand accent strip along the bottom edge -->
+        <Border Grid.Row="1" Height="4" Background="{DynamicResource HeaderGradientBrush}"/>
+
+        <Grid Grid.Row="0" Margin="16,12,16,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="What to purge" Style="{DynamicResource HeadingSmallStyle}"
+                           Foreground="{DynamicResource PrimaryBrush}"/>
+                <TextBlock Grid.Column="1" x:Name="lbl_total" Text=""
+                           VerticalAlignment="Bottom"
+                           Style="{DynamicResource SecondaryTextSmallStyle}"
+                           ToolTip="Total items that will be deleted"/>
+            </Grid>
+
+            <TextBlock Grid.Row="1"
+                       Text="Each row shows how many items will be deleted. Nothing is removed until you press Purge."
+                       Style="{DynamicResource SecondaryTextSmallStyle}"
+                       TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+            <ListBox Grid.Row="2" x:Name="list_ops" Margin="0,10,0,0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding checked}"
+                                  Checked="item_checked" Unchecked="item_unchecked"
+                                  IsEnabled="{Binding has_items}"
+                                  VerticalContentAlignment="Center"
+                                  ToolTip="{Binding tooltip}">
+                            <TextBlock Text="{Binding Label}" TextWrapping="Wrap"/>
+                        </CheckBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Row="3" Margin="0,8,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Check All" Click="check_all"
+                        Style="{DynamicResource SmallButtonStyle}" Margin="0,0,6,0"/>
+                <Button Grid.Column="1" Content="Check None" Click="check_none"
+                        Style="{DynamicResource SmallButtonStyle}"/>
+            </Grid>
+
+            <!-- Bottom bar -->
+            <Grid Grid.Row="4" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image x:Name="brand_logo" Height="24" Width="24" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="brand_wordmark" Text="BIMINENT" Margin="8,0,0,0"
+                               VerticalAlignment="Center"
+                               FontFamily="{DynamicResource PrimaryFontFamily}"
+                               FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource PrimaryBrush}"/>
+                    <TextBlock x:Name="status_text" Text="" Margin="14,0,0,0"
+                               VerticalAlignment="Center"
+                               Style="{DynamicResource SecondaryTextSmallStyle}"
+                               TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Close" Click="button_close"
+                        Style="{DynamicResource GhostButtonStyle}"/>
+                <Button Grid.Column="3" x:Name="btn_purge" Content="Purge"
+                        Click="do_purge" IsDefault="True" IsEnabled="False"
+                        Style="{DynamicResource DangerButtonStyle}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

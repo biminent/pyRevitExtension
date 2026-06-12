@@ -1,0 +1,5 @@
+title: "Purge+"
+tooltip: Clean up the model with one checklist - unplaced rooms and areas, unenclosed areas, views not on sheets, sheets without viewports, unused scope boxes, and imported DWGs. Each row shows how many will be removed before you commit.
+author: Biminent
+help_url: "https://biminent.com"
+context: doc-project

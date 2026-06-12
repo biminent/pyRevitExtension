@@ -1,0 +1,157 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About Biminent"
+        Width="520" Height="480"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Border Background="{DynamicResource BackgroundBrush}"
+            CornerRadius="10"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" Direction="270" BlurRadius="20" ShadowDepth="4" Opacity="0.3"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header: brand gradient, draggable -->
+            <Border Grid.Row="0" CornerRadius="10,10,0,0" MouseDown="header_drag">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#2a9187" Offset="0"/>
+                        <GradientStop Color="#003B73" Offset="0.5"/>
+                        <GradientStop Color="#001A3D" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid Margin="24,20,12,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="BIMINENT"
+                                   FontFamily="{DynamicResource PrimaryFontFamily}"
+                                   FontSize="{DynamicResource FontSizeXXLarge}"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        <TextBlock Text="Tools for Revit"
+                                   FontFamily="{DynamicResource PrimaryFontFamily}"
+                                   FontSize="{DynamicResource FontSizeNormal}"
+                                   Foreground="#B0FFFFFF"
+                                   Margin="2,4,0,0"/>
+                    </StackPanel>
+                    <Button Grid.Column="1"
+                            Content="&#x2715;"
+                            Click="button_close"
+                            VerticalAlignment="Top"
+                            Width="32" Height="32"
+                            FontSize="14"
+                            Foreground="White"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="bg" Background="Transparent" CornerRadius="16">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bg" Property="Background" Value="#33FFFFFF"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Body -->
+            <StackPanel Grid.Row="1" Margin="24,20,24,8">
+
+                <TextBlock TextWrapping="Wrap"
+                           FontFamily="{DynamicResource PrimaryFontFamily}"
+                           FontSize="{DynamicResource FontSizeNormal}"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           LineHeight="22">
+                    <Run FontWeight="SemiBold">Biminent</Run> provides consulting,
+                    training, and software automation for BIM workflows, helping
+                    teams streamline Revit processes and automate repetitive
+                    documentation tasks.
+                </TextBlock>
+
+                <!-- Product card -->
+                <Border Style="{DynamicResource ElevatedCardStyle}" Margin="0,18,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Apartment Sheets"
+                                       Style="{DynamicResource HeadingSmallStyle}"/>
+                            <TextBlock Text="Generate apartment plan views and sheets from Revit Areas - automatically."
+                                       Style="{DynamicResource SecondaryTextSmallStyle}"
+                                       TextWrapping="Wrap"
+                                       Margin="0,4,12,0"/>
+                        </StackPanel>
+                        <Button Grid.Column="1"
+                                Content="Learn more"
+                                Style="{DynamicResource AccentButtonStyle}"
+                                VerticalAlignment="Center"
+                                Tag="https://www.biminent.com/products#apartment-sheets"
+                                Click="open_link"/>
+                    </Grid>
+                </Border>
+
+                <!-- Links row -->
+                <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                    <Button Content="Visit biminent.com"
+                            Style="{DynamicResource PrimaryButtonStyle}"
+                            Tag="https://biminent.com"
+                            Click="open_link"/>
+                    <Button Content="Close"
+                            Style="{DynamicResource GhostButtonStyle}"
+                            Margin="10,0,0,0"
+                            Click="button_close"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Footer -->
+            <Border Grid.Row="2"
+                    Background="{DynamicResource SurfaceBrush}"
+                    CornerRadius="0,0,10,10"
+                    Padding="24,12">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" x:Name="brand_logo" Height="24" Width="24"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Grid.Column="1"
+                               x:Name="footer_version"
+                               Text="Biminent Tools"
+                               Style="{DynamicResource CaptionStyle}"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2"
+                               x:Name="footer_copyright"
+                               Text="(c) Biminent"
+                               Style="{DynamicResource CaptionStyle}"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,5 @@
+title: "Select\nSimilar"
+tooltip: Select elements similar to the picked one - by category, family, type, or by matching the value of an instance parameter. Search the active view or the whole model.
+author: Biminent
+help_url: "https://biminent.com"
+context: selection

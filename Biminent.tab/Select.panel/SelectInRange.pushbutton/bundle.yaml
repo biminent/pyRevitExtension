@@ -1,0 +1,5 @@
+title: "Select in\nRange"
+tooltip: Select elements whose instance parameter falls in a range. Pick a category (default All) and a parameter - text parameters match exactly or by an alphanumeric range (Level 01 to Level 05), numeric parameters by a from/to range in the project's units (area 3.0 to 8.0).
+author: Biminent
+help_url: "https://biminent.com"
+context: doc-project

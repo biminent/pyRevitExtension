@@ -1,0 +1,5 @@
+title: "Review\nWarnings"
+tooltip: List the model's warnings grouped by type with counts. Check the types you care about, then Select or Isolate the elements involved.
+author: Biminent
+help_url: "https://biminent.com"
+context: doc-project

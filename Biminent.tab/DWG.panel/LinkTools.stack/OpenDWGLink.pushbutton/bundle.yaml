@@ -1,0 +1,5 @@
+title: Open Link
+tooltip: Open the source file of the selected DWG/CAD link(s) in the default Windows program. Select one or more linked DWGs first.
+author: Biminent
+help_url: "https://biminent.com"
+context: selection
