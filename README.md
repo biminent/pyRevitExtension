@@ -15,8 +15,8 @@ this extension carries no GPL obligation and can be licensed freely.
 
 You need [pyRevit](https://github.com/eirannejad/pyRevit/releases) installed.
 
-**Option A — register the Biminent catalog (recommended).** Run once in a
-terminal, then install "Biminent" from pyRevit's *Extensions* window:
+**Option A — register the BMT catalog (recommended).** Run once in a
+terminal, then install "BMT" from pyRevit's *Extensions* window:
 
 ```
 pyrevit extensions sources add https://raw.githubusercontent.com/biminent/pyRevitExtension/main/extensions.json
@@ -25,16 +25,16 @@ pyrevit extensions sources add https://raw.githubusercontent.com/biminent/pyRevi
 **Option B — install directly from the repo URL:**
 
 ```
-pyrevit extend ui Biminent https://github.com/biminent/pyRevitExtension.git
+pyrevit extend ui BMT https://github.com/biminent/pyRevitExtension.git
 ```
 
-Either way, reload pyRevit (or restart Revit) and the **Biminent** tab appears
-on the ribbon. Update later with `pyrevit extensions update Biminent`.
+Either way, reload pyRevit (or restart Revit) and the **BMT** tab appears
+on the ribbon. Update later with `pyrevit extensions update BMT`.
 
 ## Structure
 
 ```
-Biminent.extension/
+BMT.extension/
   extension.json                  pyRevit extension metadata
   DESIGN.md                       the Biminent tool design language (read first!)
   lib/
