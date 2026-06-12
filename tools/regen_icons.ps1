@@ -30,10 +30,10 @@ Add-Type -AssemblyName System.Drawing
 
 # Extension root = parent of this script's folder.
 $ext = Split-Path -Parent $PSScriptRoot
-$tab = Join-Path $ext "Biminent.tab"
+$tab = Join-Path $ext "BMT.tab"
 
 # ---- LEFT-TO-RIGHT RIBBON ORDER (edit to remap the gradient) ----------------
-# rel  = icon path relative to the Biminent.tab folder
+# rel  = icon path relative to the BMT.tab folder
 # glyph/fp = text drawn on the tile and its pixel font size
 $Order = @(
     @{ rel = "Biminent.panel\About.pushbutton\icon.png";                     glyph = "B";   fp = 52 }

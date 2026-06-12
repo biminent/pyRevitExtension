@@ -42,7 +42,7 @@ Biminent.extension/
       __init__.py                 brand constants: URLs, version, colors
       ui.py                       BiminentWindow WPF base class + theme loader
     resources/theme/              Biminent WPF theme (XAML resource dictionaries)
-  Biminent.tab/
+  BMT.tab/
     Biminent.panel/               brand panel: About window + website links
     DWG.panel/                    DWG linking workflows
     Naming.panel/                 Rename Studio (reference tool implementation)
