@@ -11,6 +11,26 @@ All tools are **written from scratch** following the Biminent design language
 extensions serve as feature references only — no code is copied from them, so
 this extension carries no GPL obligation and can be licensed freely.
 
+## Installation
+
+You need [pyRevit](https://github.com/eirannejad/pyRevit/releases) installed.
+
+**Option A — register the Biminent catalog (recommended).** Run once in a
+terminal, then install "Biminent" from pyRevit's *Extensions* window:
+
+```
+pyrevit extensions sources add https://raw.githubusercontent.com/biminent/pyRevitExtension/main/extensions.json
+```
+
+**Option B — install directly from the repo URL:**
+
+```
+pyrevit extend ui Biminent https://github.com/biminent/pyRevitExtension.git
+```
+
+Either way, reload pyRevit (or restart Revit) and the **Biminent** tab appears
+on the ribbon. Update later with `pyrevit extensions update Biminent`.
+
 ## Structure
 
 ```
