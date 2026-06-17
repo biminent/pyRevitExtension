@@ -6,10 +6,10 @@ This extension is the free, community-facing tier of the Biminent product
 family. Professional products (Apartment Sheets, ...) are separate C# add-ins —
 see https://www.biminent.com/products.
 
-All tools are **written from scratch** following the Biminent design language
-(see [DESIGN.md](DESIGN.md)). The open-source EF-Tools and pyChilizer
-extensions serve as feature references only — no code is copied from them, so
-this extension carries no GPL obligation and can be licensed freely.
+All tools are **written from scratch** following the Biminent design language.
+The open-source EF-Tools and pyChilizer extensions serve as feature references
+only — no code is copied from them, so this extension carries no GPL obligation
+and can be licensed freely.
 
 ## Installation
 
@@ -36,14 +36,13 @@ on the ribbon. Update later with `pyrevit extensions update BMT`.
 ```
 BMT.extension/
   extension.json                  pyRevit extension metadata
-  DESIGN.md                       the Biminent tool design language (read first!)
   lib/
     biminent/                     shared python library (importable by all tools)
       __init__.py                 brand constants: URLs, version, colors
       ui.py                       BiminentWindow WPF base class + theme loader
     resources/theme/              Biminent WPF theme (XAML resource dictionaries)
   BMT.tab/
-    Biminent.panel/               brand panel: About window + website links
+    Biminent.panel/               brand panel: About window
     DWG.panel/                    DWG linking workflows
     Naming.panel/                 Rename Studio (reference tool implementation)
     Review.panel/                 Purge+, Review Warnings
