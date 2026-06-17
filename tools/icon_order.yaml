@@ -1,0 +1,33 @@
+# Stable left-to-right icon gradient order for BMT.tab.
+# folder paths are relative to BMT.tab.
+buttons:
+  - folder: "Biminent.panel\About.pushbutton"
+    glyph: "B"
+    fp: 52
+  - folder: "DWG.panel\LinkDWGs.pushbutton"
+    glyph: "DWG"
+    fp: 27
+  - folder: "DWG.panel\LinkTools.stack\OpenDWGLink.pushbutton"
+    glyph: "Open"
+    fp: 22
+  - folder: "DWG.panel\LinkTools.stack\ReloadDWGLink.pushbutton"
+    glyph: "Re"
+    fp: 40
+  - folder: "Naming.panel\RenameStudio.pushbutton"
+    glyph: "Aa"
+    fp: 42
+  - folder: "Review.panel\PurgePlus.pushbutton"
+    glyph: "P+"
+    fp: 40
+  - folder: "Review.panel\Warnings.pushbutton"
+    glyph: "!"
+    fp: 56
+  - folder: "Select.panel\SelectInRange.pushbutton"
+    glyph: "<>"
+    fp: 40
+  - folder: "Select.panel\SelectInScopeBox.pushbutton"
+    glyph: "[+]"
+    fp: 34
+  - folder: "Select.panel\SelectSimilar.pushbutton"
+    glyph: "[~]"
+    fp: 34

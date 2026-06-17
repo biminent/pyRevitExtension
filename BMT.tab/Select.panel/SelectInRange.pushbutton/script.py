@@ -38,6 +38,13 @@ uidoc = revit.uidoc
 KIND_TEXT = "text"
 KIND_NUMBER = "number"
 
+# Cap how many elements we touch when *discovering* parameters and prefilling
+# the numeric range hint. Opening the tool defaults to "All Categories", so an
+# unbounded scan here walks the entire model on the UI thread and hangs/crashes
+# Revit on large projects. The actual Select search (after the user clicks) is
+# still exhaustive - only this open-time work is sampled.
+SCAN_CAP = 2000
+
 
 # ---- units (version-compatible) --------------------------------------------
 
@@ -197,7 +204,13 @@ class SelectInRangeWindow(BiminentWindow):
         self.set_status("Scanning parameters...")
         infos = {}
         try:
+            scanned = 0
+            truncated = False
             for el in self._model_collector(item.category_id):
+                if scanned >= SCAN_CAP:
+                    truncated = True
+                    break
+                scanned += 1
                 try:
                     params = el.Parameters
                 except Exception:
@@ -221,7 +234,12 @@ class SelectInRangeWindow(BiminentWindow):
         self.cb_param.ItemsSource = self._params
         if self._params:
             self.cb_param.SelectedIndex = 0
-            self.set_status("{} parameter(s) found.".format(len(self._params)))
+            if truncated:
+                self.set_status(
+                    "{} parameter(s) from a sample of {} elements.".format(
+                        len(self._params), SCAN_CAP))
+            else:
+                self.set_status("{} parameter(s) found.".format(len(self._params)))
         else:
             self._show_panel(None)
             self.set_status("No usable parameters for this category.")
@@ -242,12 +260,28 @@ class SelectInRangeWindow(BiminentWindow):
         project units, and prefill the inputs as a starting range."""
         self.lbl_unit.Text = _unit_label(item.sample_param)
         lo = hi = None
+        scanned = 0
+        truncated = False
         for el in self._model_collector(self.cb_category.SelectedItem.category_id):
+            if scanned >= SCAN_CAP:
+                truncated = True
+                break
+            scanned += 1
             v = _number_value(el.LookupParameter(item.name))
             if v is None:
                 continue
             lo = v if lo is None else min(lo, v)
             hi = v if hi is None else max(hi, v)
+        if truncated:
+            # Too many elements to find the true min/max cheaply. Don't prefill
+            # bounds - sampled ones could be tighter than the real data and
+            # silently exclude matches. Leave open-ended (selects everything).
+            self.tb_from_num.Text = ""
+            self.tb_to_num.Text = ""
+            unit = (" " + self.lbl_unit.Text) if self.lbl_unit.Text else ""
+            self.lbl_range_hint.Text = (
+                "Large model - enter the range bounds manually{}.".format(unit))
+            return
         if lo is None:
             self.tb_from_num.Text = ""
             self.tb_to_num.Text = ""

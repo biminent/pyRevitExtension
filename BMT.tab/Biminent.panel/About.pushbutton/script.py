@@ -2,8 +2,7 @@
 __title__   = "About\nBiminent"
 __doc__     = """About Biminent Tools.
 
-Free productivity tools for Revit by Biminent.
-Visit biminent.com for our professional products."""
+Free productivity tools for Revit by Biminent."""
 __author__  = "Biminent"
 __helpurl__ = "https://biminent.com"
 

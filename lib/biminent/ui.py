@@ -25,7 +25,7 @@ clr.AddReference("WindowsBase")
 
 from pyrevit.framework import wpf  # noqa: E402  (engine-aware pyRevit WPF loader)
 from System import IntPtr, Uri, UriKind  # noqa: E402
-from System.Diagnostics import Process  # noqa: E402
+from System.Diagnostics import Process, ProcessStartInfo  # noqa: E402
 from System.Windows import Window, ResourceDictionary  # noqa: E402
 from System.Windows.Input import Cursors, MouseButtonState  # noqa: E402
 from System.Windows.Interop import WindowInteropHelper  # noqa: E402
@@ -64,8 +64,17 @@ def load_theme(window):
 
 
 def open_url(url):
-    """Open a link in the default browser."""
-    Process.Start(url)
+    """Open a link in the default browser.
+
+    Must go through the shell: on modern .NET (Revit 2025's runtime)
+    Process.Start defaults to UseShellExecute=False, so passing a URL string
+    makes it try to launch the URL as an executable - which fails with
+    "system cannot find the file specified". ShellExecute hands the URL to the
+    OS to resolve with the default browser.
+    """
+    psi = ProcessStartInfo(url)
+    psi.UseShellExecute = True
+    Process.Start(psi)
 
 
 # Title-bar tinting via the Windows 11 DWM API (build 22000+).

@@ -1,0 +1,99 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Connect Gemini"
+        Width="460" Height="430"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="1" Height="4" Background="{DynamicResource HeaderGradientBrush}"/>
+
+        <Grid Grid.Row="0" Margin="16,12,16,12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Connect Gemini" Style="{DynamicResource HeadingSmallStyle}" Foreground="{DynamicResource PrimaryBrush}"/>
+            <TextBlock Grid.Row="1"
+                       Text="Rename Studio can use your own Gemini API quota to generate rename previews. Create a Gemini API key in Google AI Studio, paste it here, then test the connection."
+                       Style="{DynamicResource SecondaryTextSmallStyle}"
+                       TextWrapping="Wrap" Margin="0,6,0,10"/>
+
+            <StackPanel Grid.Row="2">
+                <Button Content="Open Google AI Studio" Click="open_ai_studio"
+                        Style="{DynamicResource SmallButtonStyle}"
+                        HorizontalAlignment="Left"
+                        ToolTip="Open Google's API key page in your browser"/>
+
+                <Grid Margin="0,12,0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Gemini API key" Style="{DynamicResource CaptionStyle}"/>
+                    <TextBlock Grid.Column="1" x:Name="saved_key_text" Text="" Style="{DynamicResource SecondaryTextSmallStyle}"/>
+                </Grid>
+                <PasswordBox x:Name="pb_api_key" PasswordChar="*"/>
+                <TextBlock Text="Leave blank to keep the saved key." Style="{DynamicResource SecondaryTextSmallStyle}" Margin="0,4,0,0"/>
+
+                <Grid Margin="0,10,0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Model" Style="{DynamicResource CaptionStyle}"/>
+                    <Button Grid.Column="1" Content="Refresh" Click="refresh_models"
+                            Style="{DynamicResource SmallButtonStyle}"
+                            Padding="8,2"
+                            ToolTip="Fetch available Gemini models for this key"/>
+                </Grid>
+                <ComboBox x:Name="cmb_model" IsEditable="False"/>
+            </StackPanel>
+
+            <TextBlock Grid.Row="3" x:Name="status_text"
+                       Text=""
+                       Style="{DynamicResource SecondaryTextSmallStyle}"
+                       TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis"
+                       ToolTip="Full details are written to the pyRevit output and AI diagnostics log."
+                       Margin="0,10,0,0"/>
+
+            <Grid Grid.Row="4" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image x:Name="brand_logo" Height="24" Width="24" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="brand_wordmark" Text="BIMINENT" Margin="8,0,0,0"
+                               VerticalAlignment="Center"
+                               FontFamily="{DynamicResource PrimaryFontFamily}"
+                               FontSize="13" FontWeight="SemiBold"
+                               Foreground="{DynamicResource PrimaryBrush}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Test" Click="test_connection"
+                        Style="{DynamicResource GhostButtonStyle}"/>
+                <Button Grid.Column="3" Content="Cancel" Click="button_close"
+                        Style="{DynamicResource GhostButtonStyle}"/>
+                <Button Grid.Column="5" Content="Save" Click="do_save" IsDefault="True"
+                        Style="{DynamicResource PrimaryButtonStyle}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

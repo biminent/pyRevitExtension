@@ -32,23 +32,99 @@ Add-Type -AssemblyName System.Drawing
 $ext = Split-Path -Parent $PSScriptRoot
 $tab = Join-Path $ext "BMT.tab"
 
-# ---- LEFT-TO-RIGHT RIBBON ORDER (edit to remap the gradient) ----------------
-# rel  = icon path relative to the BMT.tab folder
-# glyph/fp = text drawn on the tile and its pixel font size
-$Order = @(
-    @{ rel = "Biminent.panel\About.pushbutton\icon.png";                     glyph = "B";   fp = 52 }
-    @{ rel = "Biminent.panel\links.stack\ApartmentSheets.urlbutton\icon.png"; glyph = "AS";  fp = 42 }
-    @{ rel = "Biminent.panel\links.stack\Website.urlbutton\icon.png";         glyph = "www"; fp = 28 }
-    @{ rel = "DWG.panel\LinkDWGs.pushbutton\icon.png";                        glyph = "DWG"; fp = 27 }
-    @{ rel = "DWG.panel\LinkTools.stack\OpenDWGLink.pushbutton\icon.png";      glyph = "Open"; fp = 22 }
-    @{ rel = "DWG.panel\LinkTools.stack\ReloadDWGLink.pushbutton\icon.png";    glyph = "Re";  fp = 40 }
-    @{ rel = "Naming.panel\RenameStudio.pushbutton\icon.png";                 glyph = "Aa";  fp = 42 }
-    @{ rel = "Review.panel\PurgePlus.pushbutton\icon.png";                    glyph = "P+";  fp = 40 }
-    @{ rel = "Review.panel\Warnings.pushbutton\icon.png";                     glyph = "!";   fp = 56 }
-    @{ rel = "Select.panel\SelectInRange.pushbutton\icon.png";                glyph = "<>";  fp = 40 }
-    @{ rel = "Select.panel\SelectInScopeBox.pushbutton\icon.png";             glyph = "[+]"; fp = 34 }
-    @{ rel = "Select.panel\SelectSimilar.pushbutton\icon.png";                glyph = "[~]"; fp = 34 }
-)
+# ---- LEFT-TO-RIGHT RIBBON ORDER --------------------------------------------
+# The stable order lives in tools/icon_order.yaml. The script uses that order
+# for the continuous cross-ribbon gradient. Existing button folders missing from
+# the YAML are appended alphabetically with a derived glyph, so newly-added tools
+# still get an icon and are easy to notice.
+$IconOrderFile = Join-Path $PSScriptRoot "icon_order.yaml"
+
+function Read-IconOrder([string]$Path) {
+    $items = @()
+    if (-not (Test-Path $Path)) { return $items }
+
+    $current = $null
+    foreach ($raw in Get-Content -Path $Path) {
+        $line = $raw.Trim()
+        if (-not $line -or $line.StartsWith("#") -or $line -eq "buttons:") { continue }
+
+        if ($line -match '^-\s+folder:\s*"?([^"#]+)"?') {
+            if ($current -ne $null) { $items += $current }
+            $current = @{ folder = $matches[1].Trim(); glyph = $null; fp = $null }
+            continue
+        }
+        if ($current -eq $null) { continue }
+        if ($line -match '^glyph:\s*"?([^"#]+)"?') {
+            $current.glyph = $matches[1].Trim()
+            continue
+        }
+        if ($line -match '^fp:\s*(\d+)') {
+            $current.fp = [int]$matches[1]
+            continue
+        }
+    }
+    if ($current -ne $null) { $items += $current }
+    return $items
+}
+
+function Get-RelativePath([string]$FullPath) {
+    $base = $tab.TrimEnd('\') + '\'
+    return $FullPath.Substring($base.Length)
+}
+
+function Get-TitleGlyph([string]$ButtonFolder) {
+    $bundle = Join-Path $ButtonFolder "bundle.yaml"
+    $title = $null
+    if (Test-Path $bundle) {
+        $match = Select-String -Path $bundle -Pattern '^title:\s*"?([^"
+]+)"?' -CaseSensitive:$false | Select-Object -First 1
+        if ($match) { $title = $match.Matches[0].Groups[1].Value.Trim() }
+    }
+    if (-not $title) {
+        $title = (Split-Path -Leaf $ButtonFolder) -replace '\.(pushbutton|urlbutton)$', ''
+    }
+    $words = [regex]::Matches($title, '[A-Z???]?[a-z???]+|[A-Z???]+|\d+') | ForEach-Object { $_.Value }
+    if ($words.Count -ge 2) {
+        return (($words | Select-Object -First 2 | ForEach-Object { $_.Substring(0, 1).ToUpperInvariant() }) -join '')
+    }
+    if ($title.Length -le 3) { return $title.ToUpperInvariant() }
+    return $title.Substring(0, [Math]::Min(3, $title.Length))
+}
+
+$existingButtons = Get-ChildItem -Path $tab -Directory -Recurse |
+    Where-Object { $_.Name -match '\.(pushbutton|urlbutton)$' }
+
+$existingByRel = @{}
+foreach ($button in $existingButtons) {
+    $relFolder = Get-RelativePath $button.FullName
+    $existingByRel[$relFolder] = $button.FullName
+}
+
+$Order = @()
+$known = @{}
+foreach ($item in Read-IconOrder $IconOrderFile) {
+    $folder = $item.folder
+    if (-not $existingByRel.ContainsKey($folder)) {
+        Write-Warning "Configured button folder missing: $folder - skipped"
+        continue
+    }
+    $known[$folder] = $true
+    $Order += @{
+        rel = Join-Path $folder "icon.png"
+        glyph = $item.glyph
+        fp = if ($item.fp) { $item.fp } else { 34 }
+    }
+}
+
+$unmapped = $existingButtons |
+    Where-Object { -not $known.ContainsKey((Get-RelativePath $_.FullName)) } |
+    Sort-Object { Get-RelativePath $_.FullName }
+foreach ($button in $unmapped) {
+    $folder = Get-RelativePath $button.FullName
+    $glyph = Get-TitleGlyph $button.FullName
+    $Order += @{ rel = Join-Path $folder "icon.png"; glyph = $glyph; fp = 34 }
+    Write-Warning "Button folder not in icon_order.yaml: $folder - appended"
+}
 
 # ---- brand gradient (Biminent.Shared.UI HeaderGradientBrush stops) ----------
 $Stops = @(
@@ -112,6 +188,7 @@ function New-Icon {
 }
 
 $n = $Order.Count
+$generated = 0
 for ($i = 0; $i -lt $n; $i++) {
     $item = $Order[$i]
     $out = Join-Path $tab $item.rel
@@ -127,8 +204,9 @@ for ($i = 0; $i -lt $n; $i++) {
         $t0 = 0.0; $t1 = 1.0   # full gradient on every tile
     }
     New-Icon -OutFile $out -Glyph $item.glyph -FontPt $item.fp -T0 $t0 -T1 $t1
+    $generated += 1
     Write-Output ("{0,-4} {1}" -f $item.glyph, $item.rel)
 }
 
 Write-Output ""
-Write-Output "Done ($Mode). $n icons regenerated. Reload pyRevit to see them."
+Write-Output "Done ($Mode). $generated icons regenerated across $n configured/existing button folders. Reload pyRevit to see them."
