@@ -1,24 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Purge+"
-__doc__     = """Clean up common model clutter from one checklist.
-
-Each row counts how many items it would remove right now; nothing is deleted
-until you press Purge. Available clean-ups:
-
-  - Unplaced rooms / areas (never placed in a plan)
-  - Unenclosed areas (placed but with no boundary, area = 0)
-  - Views not placed on any sheet
-  - Sheets with no views placed on them
-  - Unused scope boxes (not referenced by any view or datum)
-  - Imported (non-linked) DWGs
-
-Purge is danger-styled because it deletes elements - check only what you mean
-to remove.
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import revit

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__ = "Link\nDWGs"
-__doc__ = """Link multiple DWG files into the active Revit project."""
-__author__ = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 import clr

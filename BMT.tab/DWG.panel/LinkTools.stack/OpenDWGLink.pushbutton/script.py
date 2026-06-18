@@ -1,17 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__ = "Open\nLink"
-__doc__ = """Open the source file of the selected DWG/CAD link in its default
-Windows program (e.g. AutoCAD).
-
-Select one or more linked DWGs in the model or a view, then run - each link's
-external file is opened with whatever application Windows associates with it.
-Imported (non-linked) DWGs and links whose source file is missing are reported
-and skipped.
-
-Part of Biminent Tools - biminent.com"""
-__author__ = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import DB, forms, revit, script

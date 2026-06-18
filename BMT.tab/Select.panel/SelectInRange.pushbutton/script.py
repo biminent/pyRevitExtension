@@ -1,23 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Select in\nRange"
-__doc__     = """Select elements whose instance parameter falls in a range.
-
-Pick a category (All Categories by default) and one of its instance
-parameters, then constrain it:
-
-  - Text parameters (incl. Level, which shows its level name) match either an
-    exact value or an alphanumeric range - everything from one value up to
-    another, compared alphabetically, e.g. Level 01 to Level 05.
-  - Numeric parameters take a from/to range in the project's display units,
-    e.g. Area from 3.0 to 8.0. Either bound can be left blank for an
-    open-ended range. The current data range is shown as a hint.
-
-Select replaces the current selection with the matches and closes.
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import revit

@@ -1,19 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Review\nWarnings"
-__doc__     = """Review the model's warnings, grouped by type.
-
-Each row is one kind of warning with how many times it occurs. Check the
-types you want to deal with, then:
-
-  - Select - make every element involved the current Revit selection, or
-  - Isolate in view - temporarily isolate those elements in the active view
-    so you can see them in context (use Revit's "Reset Temporary Hide/Isolate"
-    to restore the view).
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import revit

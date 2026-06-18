@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Select in\nScope Box"
-__doc__     = """Select every element inside one or more scope boxes, by category.
-
-Check the scope boxes and the categories you care about, then Select -
-the matching elements become the Revit selection and the window closes so
-you can act on them. Works with rotated scope boxes.
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import revit

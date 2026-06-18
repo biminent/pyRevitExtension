@@ -1,23 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Select\nSimilar"
-__doc__     = """Select elements similar to the one you picked.
-
-Pick a single element first, then run. Choose how "similar" is judged -
-
-  - Category: every element of the same category
-  - Family: same category and family
-  - Type: same element type
-  - Instance parameter value: same category, sharing the same value for an
-    instance parameter you choose (e.g. every door whose Mark is "D-12",
-    every element on the same Comments value)
-
-and whether to search the active view or the whole model. Select replaces the
-current selection with the matches and closes so you can act on them.
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 
 from pyrevit import revit

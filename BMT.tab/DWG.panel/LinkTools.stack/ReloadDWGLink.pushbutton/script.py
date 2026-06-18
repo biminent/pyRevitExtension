@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__ = "Reload\nLink"
-__doc__ = """Reload the selected DWG/CAD link(s) from their source files.
-
-Select one or more linked DWGs in the model or a view, then run - each link is
-reloaded from disk, picking up any changes made in AutoCAD. Imported (non-linked)
-DWGs cannot be reloaded and are reported and skipped.
-
-Part of Biminent Tools - biminent.com"""
-__author__ = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 from pyrevit import DB, forms, revit
 
 from biminent import report

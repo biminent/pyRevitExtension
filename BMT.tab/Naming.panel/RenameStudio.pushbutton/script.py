@@ -1,17 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "Rename\nStudio"
-__doc__     = """Batch rename almost anything: Views, Sheets, Levels, Grids,
-Rooms, Areas, Spaces, Materials, Families, Types, Groups, Worksets, Phases,
-Scope Boxes, Reference Planes, Line Styles and View Filters.
-
-Find & replace with live preview, plus prefix and suffix.
-Check the elements you want, see the result before you commit.
-Choose which categories appear in the dropdown via the settings (gear) button.
-
-Part of Biminent Tools - biminent.com"""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import json
 import os
 import traceback

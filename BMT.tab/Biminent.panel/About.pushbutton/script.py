@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-__title__   = "About\nBiminent"
-__doc__     = """About Biminent Tools.
-
-Free productivity tools for Revit by Biminent."""
-__author__  = "Biminent"
-__helpurl__ = "https://biminent.com"
-
 import os
 from datetime import datetime
 
