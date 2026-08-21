@@ -6,6 +6,7 @@ from Autodesk.Revit.DB import (
     CategoryType,
     ElementId,
     FilteredElementCollector,
+    LabelUtils,
     StorageType,
     UnitUtils,
 )
@@ -27,17 +28,17 @@ KIND_NUMBER = "number"
 SCAN_CAP = 2000
 
 
-# ---- units (version-compatible) --------------------------------------------
+# ---- units ------------------------------------------------------------------
+# Revit 2021 replaced DisplayUnitType with ForgeTypeId and 2022 removed the old
+# enum outright, so the ForgeTypeId API is the only path on every version we
+# support. The guards below are for unitless parameters, not for API versions:
+# GetUnitTypeId() throws when the parameter is not of a value type.
 
 def _display_from_internal(param, internal):
     """Convert an internal-units double to the parameter's project display
-    units. Falls back to the raw value if units can't be resolved."""
+    units. Unitless parameters come back unchanged."""
     try:
         return UnitUtils.ConvertFromInternalUnits(internal, param.GetUnitTypeId())
-    except Exception:
-        pass
-    try:
-        return UnitUtils.ConvertFromInternalUnits(internal, param.DisplayUnitType)
     except Exception:
         return internal
 
@@ -46,22 +47,12 @@ def _internal_from_display(param, display):
     try:
         return UnitUtils.ConvertToInternalUnits(display, param.GetUnitTypeId())
     except Exception:
-        pass
-    try:
-        return UnitUtils.ConvertToInternalUnits(display, param.DisplayUnitType)
-    except Exception:
         return display
 
 
 def _unit_label(param):
     try:
-        from Autodesk.Revit.DB import LabelUtils
         return LabelUtils.GetLabelForUnit(param.GetUnitTypeId())
-    except Exception:
-        pass
-    try:
-        from Autodesk.Revit.DB import LabelUtils
-        return LabelUtils.GetLabelForUnit(param.DisplayUnitType)
     except Exception:
         return ""
 

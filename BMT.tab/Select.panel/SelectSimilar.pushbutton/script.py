@@ -10,6 +10,7 @@ from Autodesk.Revit.DB import (
 from System.Collections.Generic import List
 
 from biminent.ui import BiminentWindow
+from biminent.compat import element_id_value
 
 doc = revit.doc
 uidoc = revit.uidoc
@@ -33,7 +34,7 @@ def _param_value_key(param):
             # round to swallow floating-point noise on identical values
             return ("d", round(param.AsDouble(), 9))
         if st == StorageType.ElementId:
-            return ("e", param.AsElementId().IntegerValue)
+            return ("e", element_id_value(param.AsElementId()))
     except Exception:
         return None
     return None

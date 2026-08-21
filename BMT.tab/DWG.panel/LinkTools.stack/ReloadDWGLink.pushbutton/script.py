@@ -2,6 +2,7 @@
 from pyrevit import DB, forms, revit
 
 from biminent import report
+from biminent.compat import element_id_value
 
 doc = revit.doc
 
@@ -15,7 +16,7 @@ def _cad_link_types(elements):
         if isinstance(el, DB.ImportInstance):
             cad_type = doc.GetElement(el.GetTypeId())
         if isinstance(cad_type, DB.CADLinkType):
-            types[cad_type.Id.IntegerValue] = cad_type
+            types[element_id_value(cad_type.Id)] = cad_type
     return list(types.values())
 
 

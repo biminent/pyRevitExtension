@@ -16,6 +16,7 @@ from Autodesk.Revit.DB import (
 )
 
 from biminent.ui import BiminentWindow
+from biminent.compat import element_id_value
 from biminent import report
 
 doc = revit.doc
@@ -69,8 +70,8 @@ def _unenclosed_areas():
 def _views_not_on_sheets():
     placed = set()
     for vp in FilteredElementCollector(doc).OfClass(Viewport):
-        placed.add(vp.ViewId.IntegerValue)
-    active_id = doc.ActiveView.Id.IntegerValue
+        placed.add(element_id_value(vp.ViewId))
+    active_id = element_id_value(doc.ActiveView.Id)
     out = []
     for v in FilteredElementCollector(doc).OfClass(View):
         try:
@@ -78,9 +79,9 @@ def _views_not_on_sheets():
                 continue
             if v.ViewType not in _DELETABLE_VIEW_TYPES:
                 continue
-            if v.Id.IntegerValue == active_id:
+            if element_id_value(v.Id) == active_id:
                 continue
-            if v.Id.IntegerValue in placed:
+            if element_id_value(v.Id) in placed:
                 continue
             out.append(v.Id)
         except Exception:
@@ -108,7 +109,7 @@ def _scope_box_used_ids():
         try:
             p = v.get_Parameter(BuiltInParameter.VIEWER_VOLUME_OF_INTEREST_CROP)
             if p is not None and p.AsElementId() != ElementId.InvalidElementId:
-                used.add(p.AsElementId().IntegerValue)
+                used.add(element_id_value(p.AsElementId()))
         except Exception:
             continue
     for bic in (BuiltInCategory.OST_Grids, BuiltInCategory.OST_Levels,
@@ -119,7 +120,7 @@ def _scope_box_used_ids():
             try:
                 p = d.get_Parameter(BuiltInParameter.DATUM_VOLUME_OF_INTEREST)
                 if p is not None and p.AsElementId() != ElementId.InvalidElementId:
-                    used.add(p.AsElementId().IntegerValue)
+                    used.add(element_id_value(p.AsElementId()))
             except Exception:
                 continue
     return used
@@ -131,7 +132,7 @@ def _unused_scope_boxes():
     for sb in (FilteredElementCollector(doc)
                .OfCategory(BuiltInCategory.OST_VolumeOfInterest)
                .WhereElementIsNotElementType()):
-        if sb.Id.IntegerValue not in used:
+        if element_id_value(sb.Id) not in used:
             out.append(sb.Id)
     return out
 
