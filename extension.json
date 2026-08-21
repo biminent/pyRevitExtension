@@ -4,7 +4,7 @@
     "type": "extension",
     "rocket_mode_compatible": "True",
     "name": "BMT",
-    "description": "BMT - free productivity tools for Revit by Biminent. Visit biminent.com for Apartment Sheets and other professional BIM products.",
+    "description": "BMT - free Revit tools by Biminent. Visit biminent.com for Apartment Sheets and other professional BIM products.",
     "author": "Viktor Kuzev",
     "author_profile": "https://biminent.com",
     "url": "https://github.com/biminent/pyRevitExtension.git",

@@ -1,6 +1,6 @@
 # Biminent Tools (pyRevit extension)
 
-Free productivity tools for Revit by [Biminent](https://biminent.com).
+Free Revit tools by [Biminent](https://biminent.com).
 
 This extension is the free, community-facing tier of the Biminent product
 family. Professional products (Apartment Sheets, ...) are separate C# add-ins —
