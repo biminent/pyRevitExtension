@@ -31,3 +31,6 @@ buttons:
   - folder: "Select.panel\SelectSimilar.pushbutton"
     glyph: "[~]"
     fp: 34
+  - folder: "Inspect.panel\Copy Element IDs.pushbutton"
+    glyph: "ID"
+    fp: 42

@@ -1,0 +1,6 @@
+title: "Copy\nIDs"
+tooltip: >-
+  Copy the selected element IDs directly to the clipboard without a dialog.
+  Multiple IDs are separated by commas. Assign a keyboard shortcut in Revit
+  to copy IDs without clicking the ribbon.
+context: selection
